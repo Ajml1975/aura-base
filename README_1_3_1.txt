@@ -1,0 +1,1 @@
+AURA BASE 1.3.1 — incorpora Archivo → Guardar como… para elegir el nombre de la copia .db. No genera .mdb ni .accdb. El nombre se actualiza en pantalla al iniciar la descarga. El archivo original del ordenador no se sobrescribe automáticamente.\n

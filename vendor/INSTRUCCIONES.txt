@@ -1,0 +1,11 @@
+DEPENDENCIA OFICIAL SQL.JS (SQLite compilado a WebAssembly)
+
+Antes de publicar AURA BASE, descargar los DOS archivos de la misma versión de sql.js:
+https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js
+https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.wasm
+
+Guardarlos en esta carpeta con los nombres exactos sql-wasm.js y sql-wasm.wasm.
+NO renombrar sql-wasm.wasm como .js.
+
+Licencia de sql.js: MIT. Proyecto: https://github.com/sql-js/sql.js
+Este entorno de construcción no dispone de acceso a Internet para incorporar los binarios. Sin estos dos archivos la aplicación no podrá iniciar el motor SQLite.

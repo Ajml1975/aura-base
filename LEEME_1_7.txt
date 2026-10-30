@@ -1,0 +1,22 @@
+AURA BASE 1.7 — INFORMES, MACROS Y CÓDIGO SQL
+================================================
+INFORMES: origen tabla o consulta SELECT guardada, campos configurables, ordenación,
+vista previa, impresión / PDF mediante diálogo del navegador, diseños guardados en .db.
+Máximo 2000 filas por informe en esta entrega.
+
+MACROS: secuencias guardadas de acciones predefinidas: abrir tabla, formulario,
+informe o consulta; mostrar mensaje; descargar .db. Hasta 30 pasos.
+No ejecuta VBA ni JavaScript ni SQL arbitrario.
+
+CÓDIGO: módulos SQL de lectura SELECT / WITH / JOIN / UNION y subconsultas,
+guardar en .db, ejecutar hasta 500 filas y exportar .sql. No es editor VBA.
+
+Las tres zonas aparecen en el panel izquierdo, en pestañas y en la cinta Crear.
+Los objetos se conservan descargando el .db. Se mantienen las funciones anteriores.
+LIMITACIONES: no reproduce todos los controles ni eventos de Access; no incluye
+motor VBA, informes agrupados complejos, macros condicionales ni programación
+arbitraria. .mdb/.accdb requieren conversor/controlador y no se exportan.
+Prueba con una copia de tu base antes de utilizarla con datos importantes.
+
+INSTALACIÓN: descomprime ZIP y ejecuta INICIAR_AURA_BASE.bat. Cierra el
+servidor anterior y recarga Chrome con Ctrl+Mayús+R.

@@ -1,0 +1,86 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#68243b"><meta name="description" content="AURA BASE: gestor educativo SQLite local"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/styles.css"><title>AURA BASE 1.7.0</title></head><body>
+<header><div class="brand">▦ AURA BASE <small>1.7.0 · SQLite local</small></div><nav><button data-tab="archivo">Archivo</button><button data-tab="inicio" class="active">Inicio</button><button data-tab="crear">Crear</button><button data-tab="datos">Datos externos</button><button data-tab="herramientas">Herramientas de base de datos</button></nav></header>
+<div id="ribbon" class="ribbon"><button id="newDb">＋ Nueva base</button><button id="openDb">📂 Abrir .db</button><button id="downloadDb">⬇ Descargar .db</button><span class="sep"></span><button id="newTable">＋ Nueva tabla</button><button id="designView">▤ Vista Diseño</button><button id="dataView">▦ Hoja de datos</button><button id="deleteTable" class="danger">Eliminar tabla</button><button id="installBtn" hidden>Instalar app</button></div>
+<div class="layout"><aside><h3>Todos los objetos</h3><div class="side-label">TABLAS</div><div id="tablesList"></div><div class="side-label">RELACIONES</div><div id="relationshipsList"></div><div class="side-label">CONSULTAS</div><div id="queriesList"></div><div class="side-label">FORMULARIOS</div><div id="formsList"></div><div class="side-label">INFORMES</div><div id="reportsList"></div><div class="side-label">MACROS</div><div id="macrosList"></div><div class="side-label">CÓDIGO SQL</div><div id="codeList"></div></aside><main><div id="objectTabs" class="object-tabs"></div><div class="workspace-head"><div><strong id="dbTitle">Sin base de datos</strong><span id="tableTitle"></span></div><span id="status">Preparando SQLite…</span></div><section id="welcome"><h1>Bienvenido a AURA BASE</h1><p>Diseña bases de datos relacionales en tu navegador y descarga el resultado como archivo SQLite .db.</p><p>Comienza con <b>Nueva base</b> o abre un archivo existente. Los datos no se suben a ningún servidor.</p><p class="hint">Consejo: descarga tu trabajo al terminar cada sesión. El almacenamiento de esta versión permanece en memoria hasta que exportes el archivo.</p></section><section id="designer" hidden><div class="section-title"><h2>Vista Diseño · <span id="designName"></span></h2><button id="addField">＋ Añadir campo</button><button id="saveStructure" class="primary">Guardar estructura</button></div><div class="table-wrap"><table id="fieldTable"><thead><tr><th>🔑</th><th>Nombre del campo</th><th>Tipo de datos</th><th>Descripción</th><th></th></tr></thead><tbody></tbody></table></div><div class="properties"><h3>Propiedades del campo seleccionado</h3><div class="property-grid"><label>Tamaño máximo <input id="propSize" type="number" min="1" max="1000000" placeholder="Sin límite"></label><label>Valor predeterminado <input id="propDefault" placeholder="Opcional"></label><label>Formato de presentación <input id="propFormat" placeholder="Ej. dd/mm/aaaa"></label><label>Máscara informativa <input id="propMask" placeholder="Ej. 00000000L"></label><label><input type="checkbox" id="propRequired"> Requerido</label><label><input type="checkbox" id="propUnique"> Sin duplicados (único)</label><label><input type="checkbox" id="propIndexed"> Indexado</label>
+<label>Título <input id="propCaption" placeholder="Nombre mostrado"></label>
+<label>Regla de validación <input id="propValidation" placeholder='Ej. >=18, <=100, <>""'></label>
+<label>Texto de validación <input id="propValidationText" placeholder="Mensaje al incumplir"></label>
+<label>Lugares decimales <input id="propDecimals" type="number" min="0" max="10" placeholder="Automático"></label>
+<label><input type="checkbox" id="propAllowZero"> Permitir longitud cero</label>
+<label><input type="checkbox" id="propUnicode"> Compresión Unicode (metadato)</label></div><p class="hint">El formato, la máscara y la compresión Unicode se conservan como metadatos. Las reglas sencillas de validación se aplican al guardar registros. Los cambios de estructura se validan mediante una migración transaccional. Descarga una copia .db antes de modificar campos con registros. Los cambios de nombre se detectan por posición; revisa la confirmación.</p></div></section><section id="datasheet" hidden><div class="section-title"><h2>Hoja de datos · <span id="dataName"></span></h2><button id="addRecord">＋ Nuevo registro</button><button id="saveRecord" class="primary">Guardar registro</button></div><div class="filters"><label>Filtrar registros <input id="filterRecords" placeholder="Buscar en los valores visibles"></label><button id="reloadRecords">Actualizar</button></div><div class="table-wrap"><table id="recordsTable"><thead></thead><tbody></tbody></table></div><h3 id="recordEditorTitle">Nuevo registro</h3><div id="recordEditor" class="record-grid"></div><p class="hint">Selecciona «Editar» en una fila para modificarla. La columna de clave primaria se gestiona automáticamente si es autonumeración.</p></section>
+<section id="relations" hidden>
+ <div class="section-title"><h2>Diseñador de relaciones</h2><button id="addRelation" class="primary">＋ Crear relación</button><button id="refreshRelations">Actualizar</button></div>
+ <p class="hint">Arrastra las tarjetas por su cabecera. Para crear una relación, arrastra el campo clave principal de una tabla al campo relacionado de otra. Selecciona los campos desde «Crear relación». Las relaciones se guardan en el archivo .db y se comprueban al modificar registros desde AURA BASE.</p>
+ <div id="relationsCanvas" class="relations-canvas"><svg id="relationsLines" aria-hidden="true"></svg><div id="relationsCards"></div></div>
+ <h3>Relaciones definidas</h3><div id="relationsTable"></div>
+</section>
+<section id="queries" hidden>
+<div class="section-title"><h2>Diseño de consultas · <span id="queryHeading">Nueva consulta</span></h2>
+<button id="queryNew">＋ Nueva consulta</button><button id="querySave">Guardar consulta</button><button id="queryExecute" class="primary">▶ Ejecutar</button></div>
+<div class="query-tools">
+<label>Nombre de consulta<input id="queryName" placeholder="ClientesActivos"></label>
+<label>Tabla de origen<select id="queryTable"></select></label>
+<label>Tipo de consulta<select id="queryType">
+<option value="select">1. Selección</option>
+<option value="make">2. Acción · Crear tabla</option>
+<option value="append">2. Acción · Anexar</option>
+<option value="update">2. Acción · Actualizar</option>
+<option value="delete">2. Acción · Eliminar</option>
+<option value="cross">3. Tabla cruzada</option>
+<option value="parameter">4. Con parámetros</option>
+<option value="sql">5. SQL específico (SELECT / UNION)</option>
+</select></label>
+<label>Vista<select id="queryMode"><option value="visual">Diseño visual</option><option value="sql">Vista SQL</option></select></label>
+</div>
+<div id="queryVisual">
+<p class="hint">Selecciona los campos que quieres mostrar. Puedes indicar criterios de igualdad o comparación y ordenar los resultados.</p>
+<div class="table-wrap"><table id="queryGrid"><thead><tr><th>Mostrar</th><th>Campo</th><th>Criterio (ej. &gt;100, =Madrid)</th><th>Orden</th></tr></thead><tbody></tbody></table></div>
+</div>
+<div id="queryExtra" class="query-extra" hidden>
+<div id="actionTargetWrap"><label>Tabla de destino / nueva tabla <input id="queryTarget" placeholder="Nombre de tabla"></label></div>
+<div id="updateWrap" hidden><label>Campo a actualizar <select id="updateField"></select></label><label>Nuevo valor (literal) <input id="updateValue" placeholder="Ej. 100, Activo"></label></div>
+<div id="crossWrap" hidden><label>Campo de filas <select id="crossRow"></select></label><label>Campo de columnas <select id="crossCol"></select></label><label>Campo de valores <select id="crossValue"></select></label><label>Operación <select id="crossAgg"><option>SUM</option><option>COUNT</option><option>AVG</option><option>MIN</option><option>MAX</option></select></label></div>
+<div id="paramWrap" hidden><label>Campo con parámetro <select id="paramField"></select></label><label>Texto de solicitud <input id="paramLabel" value="Introduce el valor"></label><label>Comparador <select id="paramOperator"><option>=</option><option>&gt;</option><option>&lt;</option><option>&gt;=</option><option>&lt;=</option><option>&lt;&gt;</option></select></label></div>
+</div>
+<div id="querySqlPanel" hidden><label>Sentencia SQL de selección<textarea id="querySql" rows="7" spellcheck="false" placeholder='SELECT * FROM "Clientes"'></textarea></label><p class="hint">Admite SELECT, UNION y subconsultas de lectura. Las operaciones de modificación se ejecutan únicamente mediante los asistentes de acción.</p></div>
+<div class="query-actions"><button id="queryDelete">Eliminar consulta guardada</button><button id="queryPreview">Vista previa / SQL</button><span id="queryCount"></span></div>
+<h3>Resultados</h3><div class="table-wrap query-results"><table id="queryResults"><thead></thead><tbody></tbody></table></div>
+</section>
+<section id="forms" hidden>
+<div class="section-title"><h2>Diseñador de formularios · <span id="formHeading">Nuevo formulario</span></h2><button id="formNew">＋ Nuevo formulario</button><button id="formSave" class="primary">Guardar diseño</button><button id="formRemove">Eliminar diseño</button></div>
+<div class="query-tools"><label>Nombre del formulario<input id="formName" placeholder="FichaClientes"></label><label>Tabla origen<select id="formSource"></select></label><label>Diseño<select id="formLayout"><option value="ficha">Ficha individual</option><option value="tabla">Formulario continuo (tabla)</option></select></label><label>Título<input id="formTitle" value="Ficha de datos"></label></div>
+<h3>Campos y etiquetas</h3><p class="hint">Activa los campos que deseas mostrar y modifica su etiqueta. Los formularios se guardan dentro de la base .db.</p><div id="formFields" class="form-fields"></div>
+<div class="section-title"><h3>Vista del formulario</h3><div><button id="formPrevious">← Anterior</button><button id="formNext">Siguiente →</button><button id="formNewRecord">＋ Registro</button><button id="formSaveRecord" class="primary">Guardar registro</button><button id="formDeleteRecord">Eliminar registro</button></div></div><div id="formPreview" class="form-preview"></div>
+<p class="hint">En vista de ficha puedes crear, modificar y eliminar registros. Guarda una copia .db antes de hacer cambios importantes. Los formularios de Access no se importan: se importan tablas y datos cuando el controlador lo permite.</p>
+</section>
+<section id="reports" hidden>
+<div class="section-title"><h2>Diseñador de informes · <span id="reportHeading">Nuevo informe</span></h2><button id="reportNew">＋ Nuevo</button><button id="reportSave">Guardar diseño</button><button id="reportPrint" class="primary">Imprimir / PDF</button></div>
+<div class="query-tools"><label>Nombre <input id="reportName" placeholder="InformePrestamos"></label><label>Título <input id="reportTitle" placeholder="Listado de préstamos"></label><label>Origen de datos <select id="reportSource"></select></label><label>Orientación <select id="reportOrientation"><option value="portrait">Vertical</option><option value="landscape">Horizontal</option></select></label></div>
+<h3>Campos del informe</h3><div id="reportFields" class="advanced-field-list"></div>
+<div class="query-actions"><label>Ordenar por <select id="reportSort"></select></label><label><input type="checkbox" id="reportTotals"> Mostrar total de registros</label><button id="reportPreview">Vista previa</button><button id="reportDelete">Eliminar diseño</button></div>
+<div id="reportOutput" class="report-output"></div><p class="hint">Los informes se generan desde tablas o consultas de selección guardadas. Utiliza Imprimir / PDF y selecciona «Guardar como PDF» en Windows.</p>
+</section>
+<section id="macros" hidden>
+<div class="section-title"><h2>Diseñador de macros · <span id="macroHeading">Nueva macro</span></h2><button id="macroNew">＋ Nueva</button><button id="macroSave">Guardar macro</button><button id="macroRun" class="primary">▶ Ejecutar</button></div>
+<div class="query-tools"><label>Nombre de macro <input id="macroName" placeholder="AbrirPrestamos"></label></div>
+<p class="hint">Las macros son secuencias de acciones predefinidas. No ejecutan JavaScript ni SQL de modificación arbitrario.</p>
+<div id="macroSteps" class="macro-steps"></div><div class="query-actions"><button id="macroAdd">＋ Añadir acción</button><button id="macroDelete">Eliminar macro</button></div>
+<div id="macroLog" class="hint"></div>
+</section>
+<section id="code" hidden>
+<div class="section-title"><h2>Editor de código SQL · <span id="codeHeading">Nuevo módulo</span></h2><button id="codeNew">＋ Nuevo</button><button id="codeSave">Guardar código</button><button id="codeRun" class="primary">▶ Ejecutar SELECT</button></div>
+<div class="query-tools"><label>Nombre del módulo <input id="codeName" placeholder="ListadoPeliculas"></label></div>
+<label>SQL de lectura<textarea id="codeText" rows="12" spellcheck="false" placeholder='SELECT * FROM &quot;VIDEOS&quot;'></textarea></label>
+<div class="query-actions"><button id="codeDelete">Eliminar módulo</button><button id="codeExport">Exportar .sql</button><span id="codeStatus"></span></div>
+<div class="table-wrap query-results"><table id="codeResults"><thead></thead><tbody></tbody></table></div>
+<p class="hint">Editor SQL seguro de lectura: SELECT, WITH, JOIN, UNION y subconsultas. No es un intérprete de VBA ni permite ejecutar JavaScript. La definición de datos y las modificaciones se realizan desde los diseñadores correspondientes.</p>
+</section></main></div><footer><span id="footerText">Motor SQLite ejecutado en el navegador</span><span>Sin servidor de datos · Exportación .db · Access pendiente</span></footer><input type="file" id="fileInput" accept=".db,.sqlite,.sqlite3,.mdb,.accdb,application/octet-stream" hidden><div id="toast" role="status" aria-live="polite"></div>
+<div id="saveAsDialog" class="saveas-overlay" hidden><div class="saveas-panel" role="dialog" aria-modal="true" aria-labelledby="saveAsTitle">
+<h2 id="saveAsTitle">Guardar base de datos como</h2>
+<label>Nombre del archivo<input id="saveAsName" type="text" autocomplete="off" placeholder="Empresa_Comercial"></label>
+<label>Tipo de archivo<select id="saveAsFormat"><option value="db">AURA BASE / SQLite (*.db)</option><option value="mdb" disabled>Microsoft Access (*.mdb) — pendiente</option><option value="accdb" disabled>Microsoft Access (*.accdb) — pendiente</option></select></label>
+<label>Ubicación<select id="saveAsDestination"><option value="choose">Elegir carpeta y nombre (Chrome/Edge compatibles)</option><option value="downloads">Descargar con las preferencias del navegador</option></select></label>
+<p id="saveAsChooseHint" class="hint"></p><p class="hint">La exportación auténtica a .mdb y .accdb está pendiente. No se cambiará la extensión de un archivo SQLite.</p>
+<div class="saveas-buttons"><button id="saveAsCancel" type="button">Cancelar</button><button id="saveAsConfirm" type="button" class="primary">Guardar</button></div>
+</div></div>
+<script src="vendor/sql-wasm.js"></script><script src="js/app.js"></script><script src="js/queries.js"></script><script src="js/forms.js"></script><script src="js/access-import.js"></script><script src="js/advanced.js"></script></body></html>

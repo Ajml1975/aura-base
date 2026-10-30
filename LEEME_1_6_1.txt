@@ -1,0 +1,1 @@
+AURA BASE 1.6.1 — Relaciones por arrastrar y soltar.\nArrastra VIDEOS.CÓDIGO a PRÉSTAMOS.CÓDIGO.\nLas películas sin préstamos están permitidas.\nSi hay préstamos huérfanos, se muestran los códigos afectados.\nHaz copia de seguridad del .db antes de modificar relaciones.\nEl módulo conserva las funciones de AURA BASE 1.6.\n

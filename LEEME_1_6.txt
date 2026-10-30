@@ -1,0 +1,34 @@
+AURA BASE 1.6 — FORMULARIOS + IMPORTACIÓN ACCESS (BETA)
+======================================================
+FORMULARIOS
+- Crea formularios asociados a tablas, selecciona campos y personaliza etiquetas.
+- Dos diseños: ficha individual y vista continua en tabla.
+- Navega, añade, modifica y elimina registros desde la ficha.
+- Los diseños se guardan en _aura_forms dentro del archivo SQLite .db.
+- No hay aún subformularios, controles calculados, botones de macros ni origen de datos basado en consultas.
+
+ABRIR .MDB Y .ACCDB
+- Usa Archivo > Abrir .db / Access y selecciona un archivo Access.
+- El servidor Python local usa PowerShell y los controladores Microsoft ACE/Jet OLE DB.
+- Si NO existe un proveedor compatible, se informa del error. No se puede garantizar
+  la apertura en todos los equipos sin instalar Microsoft Access Database Engine.
+- Se importan tablas y registros. NO se importan formularios, informes, macros,
+  consultas Access, VBA, relaciones ni las propiedades específicas de Access.
+- El archivo Access ORIGINAL nunca se modifica. Se crea una base SQLite en memoria
+  y debe guardarse como .db desde AURA BASE.
+- No abre archivos cifrados ni protegidos por contraseña; máximo 40 MB.
+- Solo funciona el conversor en Windows con proveedor Access instalado.
+- No se admite apertura nativa de .mdb/.accdb en Google Sites o en Android.
+
+INSTALACIÓN
+1. Extrae todo el ZIP y ejecuta INICIAR_AURA_BASE.bat desde la carpeta principal.
+2. Cierra antes la consola del servidor de versiones anteriores (puerto 8765).
+3. Usa Chrome/Edge y http://127.0.0.1:8765/.
+4. Si ves una versión anterior, recarga con Ctrl+Mayús+R o borra datos del sitio.
+5. Para importar Access en Windows, es necesario el proveedor ACE OLEDB 12/16
+   o Jet 4.0 compatible con el archivo y la arquitectura de PowerShell.
+6. Haz una copia de seguridad de los datos antes de probar las funciones.
+
+ESTADO
+Sintaxis verificada; importación real de Access NO probada en Windows con ACE.
+Esta versión es una beta educativa y no sustituye a Microsoft Access.

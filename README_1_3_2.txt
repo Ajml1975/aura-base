@@ -1,0 +1,1 @@
+AURA BASE 1.3.2 — Guardar como: nombre, formato .db y elección de carpeta mediante selector nativo en navegadores compatibles. Alternativa de descarga tradicional. .mdb y .accdb pendientes, deshabilitados. Realiza copia de seguridad del .db antes de probar.
