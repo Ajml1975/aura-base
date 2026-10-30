@@ -1,0 +1,9 @@
+AURA BASE 1.8.1 BETA — corrección experimental de importación Access
+
+Se corrige el tipo de entrada para mdb-reader: antes ArrayBuffer, ahora Buffer de buffer@6.0.3.
+Se actualiza la caché PWA. Se usan getColumns() para tipos y TEXT para valores monetarios/decimales, evitando pérdida de precisión.
+
+IMPORTANTE: No se ha podido ejecutar una prueba integral en navegador con el MDB aportado.
+El lector se descarga desde esm.sh y requiere conexión; un bloqueo de CDN puede impedir importar.
+La importación de consultas, formularios, relaciones y macros de Access sigue fuera del alcance.
+No sustituyas una instalación estable hasta validar la importación.

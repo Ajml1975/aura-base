@@ -1,0 +1,8 @@
+AURA BASE 1.8 BETA
+
+Importación experimental de Access MDB/ACCDB directamente en el navegador.
+Requiere Internet para cargar el lector externo desde https://esm.sh/mdb-reader?bundle.
+No está verificada la compatibilidad del archivo de ejemplo ni todos los formatos Access.
+No se importan consultas, formularios, macros, VBA ni relaciones.
+Haz una copia de seguridad de tus bases .db antes de actualizar.
+Para publicar en GitHub Pages, sube el CONTENIDO de esta carpeta al directorio raíz del repositorio, conservando nombres y rutas.
