@@ -1,0 +1,11 @@
+AURA BASE 1.8.3 - Corrección importador GitHub Pages
+
+Basado en 1.8.1 funcional, no en 1.8.2 defectuosa.
+
+1. Subir TODO el contenido de este ZIP a la raíz del repositorio GitHub.
+2. Esperar a que Pages despliegue el commit.
+3. En Chrome abrir la URL directa en ventana de incógnito para evitar service workers anteriores.
+4. Probar importación MDB y operaciones CRUD.
+5. No probar primero dentro de Google Sites, que restringe diálogos nativos.
+
+Esta compilación ha sido revisada estáticamente; no se ha comprobado la importación completa en un navegador real.

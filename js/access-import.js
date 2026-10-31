@@ -58,7 +58,13 @@ async function importAccessFile(file){
     const rows=table.getData();
     const columns=table.getColumnNames();
     if(!columns.length){skipped.push(name+' (sin campos)');continue}
-    const def=columns.map(c=>accessSqlId(c)+' '+accessSqlType(table.getColumns().find(x=>x.name===c))).join(',');
+    const defs=table.getColumns();
+    const def=columns.map(c=>{
+      const colName=accessSqlId(c);
+      const colType=accessSqlType(defs.find(x=>x.name===c));
+      if(typeof colName!=='string'||typeof colType!=='string')throw Error('Definición de columna inválida');
+      return colName+' '+colType;
+    }).join(',');
     candidate.run('CREATE TABLE '+accessSqlId(name)+' ('+def+')');
     const insert='INSERT INTO '+accessSqlId(name)+' ('+columns.map(accessSqlId).join(',')+') VALUES ('+columns.map(()=>'?').join(',')+')';
     const statement=candidate.prepare(insert);
