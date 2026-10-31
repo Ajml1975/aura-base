@@ -1,0 +1,7 @@
+AURA BASE 1.8.2 BETA - Compatibilidad con Google Sites
+
+Sustituye los archivos del repositorio por los contenidos de este ZIP, conservando rutas.
+Los diálogos nativos alert/confirm/prompt se han sustituido por diálogos HTML internos.
+La importación .mdb conserva el módulo 1.8.1.
+Verifica eliminar tabla, consultas con parámetros, macros y formularios tanto en GitHub Pages como en Google Sites.
+No subas datos personales ni bases .mdb al repositorio público.
