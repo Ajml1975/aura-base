@@ -3,8 +3,8 @@
    Requiere conexión a esm.sh. No utiliza el endpoint local /api/import-access. */
 const ACCESS_READER_URL='https://esm.sh/mdb-reader@3.2.0?bundle';
 const ACCESS_BUFFER_URL='https://esm.sh/buffer@6.0.3?bundle';
-async function accessSqlId(name){return '"'+String(name).replace(/"/g,'""')+'"'}
-async function accessSqlType(col){
+function accessSqlId(name){return '"'+String(name).replace(/"/g,'""')+'"'}
+function accessSqlType(col){
  const t=String(col?.type||col?.dataType||'').toLowerCase();
  if(/int|long|short|byte|counter|auto|bool/.test(t))return 'INTEGER';
  if(/currency|numeric|decimal|money/.test(t))return 'TEXT'; // Evitar pérdida de precisión decimal.
@@ -12,7 +12,7 @@ async function accessSqlType(col){
  if(/binary|ole|blob|attachment/.test(t))return 'BLOB';
  return 'TEXT';
 }
-async function accessValue(v){
+function accessValue(v){
  if(v===null||v===undefined)return null;
  if(v instanceof Date)return Number.isFinite(v.getTime())?v.toISOString():null;
  if(v instanceof Uint8Array)return v;
@@ -25,9 +25,9 @@ async function accessValue(v){
 }
 async function importAccessFile(file){
  if(!file)return;
- if(!SQL){await auraAlert('Espera a que SQLite termine de iniciarse.');return}
- if(dirty&&!await auraConfirm('La importación sustituirá la base abierta. Descarga primero tus cambios. ¿Continuar?'))return;
- if(file.size>40*1024*1024){await auraAlert('El archivo supera el límite experimental de 40 MB.');return}
+ if(!SQL){alert('Espera a que SQLite termine de iniciarse.');return}
+ if(dirty&&!confirm('La importación sustituirá la base abierta. Descarga primero tus cambios. ¿Continuar?'))return;
+ if(file.size>40*1024*1024){alert('El archivo supera el límite experimental de 40 MB.');return}
  let candidate=null;
  try{
   notify('Cargando lector Access web…');
@@ -72,7 +72,7 @@ async function importAccessFile(file){
   db?.close();db=candidate;candidate=null;
   upgradeMetadata();dbName=file.name.replace(/\.(mdb|accdb)$/i,'')+'_importada.db';currentTable=null;dirty=true;show('welcome');
   const message='Importadas '+imported+' tablas y '+count+' registros.'+(skipped.length?' No importadas: '+skipped.join('; '):'')+' Guarda una copia .db.';
-  notify(message);await auraAlert('Importación Access (BETA)\n\n'+message+'\n\nLas consultas, formularios, macros y relaciones de Access no se convierten automáticamente.');
- }catch(err){console.error('Importación Access:',err);await auraAlert('No se pudo importar el archivo Access.\n\n'+err.message+'\n\nEsta función es experimental y depende de la compatibilidad del lector web.');}
+  notify(message);alert('Importación Access (BETA)\n\n'+message+'\n\nLas consultas, formularios, macros y relaciones de Access no se convierten automáticamente.');
+ }catch(err){console.error('Importación Access:',err);alert('No se pudo importar el archivo Access.\n\n'+err.message+'\n\nEsta función es experimental y depende de la compatibilidad del lector web.');}
  finally{if(candidate)candidate.close()}
 }

@@ -44,8 +44,3 @@
 .macro-step{display:flex;gap:8px;margin:8px 0}.macro-step select{flex:1}.macro-step input{flex:2}
 .macro-step input,.macro-step select,#codeText{padding:9px;border:1px solid #cbd1db;border-radius:5px}
 #codeText{width:100%;box-sizing:border-box;font:14px Consolas,monospace}
-
-/* AURA BASE 1.8.2: diálogos accesibles en marcos de Google Sites */
-.aura-dialog-overlay{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
-.aura-dialog-panel{width:min(100%,480px);max-height:90vh;overflow:auto;background:#fff;color:#1c2634;border-radius:12px;padding:22px;box-shadow:0 15px 50px rgba(0,0,0,.3);box-sizing:border-box}
-.aura-dialog-panel h3{margin:0 0 12px;color:#68243b}.aura-dialog-panel p{line-height:1.5;overflow-wrap:anywhere}.aura-dialog-panel input{display:block;width:100%;box-sizing:border-box;padding:10px;margin:12px 0}.aura-dialog-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}.aura-dialog-actions button{cursor:pointer;padding:10px 16px}
