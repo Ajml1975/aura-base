@@ -78,9 +78,9 @@
 <div id="saveAsDialog" class="saveas-overlay" hidden><div class="saveas-panel" role="dialog" aria-modal="true" aria-labelledby="saveAsTitle">
 <h2 id="saveAsTitle">Guardar base de datos como</h2>
 <label>Nombre del archivo<input id="saveAsName" type="text" autocomplete="off" placeholder="Empresa_Comercial"></label>
-<label>Tipo de archivo<select id="saveAsFormat"><option value="db">AURA BASE / SQLite (*.db)</option><option value="mdb" disabled>Microsoft Access (*.mdb) — pendiente</option><option value="accdb" disabled>Microsoft Access (*.accdb) — pendiente</option></select></label>
+<label>Tipo de archivo<select id="saveAsFormat"><option value="db">AURA BASE / SQLite (*.db)</option><option value="mdb">Microsoft Access (*.mdb) — conversor Windows</option><option value="accdb">Microsoft Access (*.accdb) — conversor Windows</option><option value="odb" disabled>LibreOffice Base (*.odb) — en desarrollo</option></select></label>
 <label>Ubicación<select id="saveAsDestination"><option value="choose">Elegir carpeta y nombre (Chrome/Edge compatibles)</option><option value="downloads">Descargar con las preferencias del navegador</option></select></label>
-<p id="saveAsChooseHint" class="hint"></p><p class="hint">La exportación auténtica a .mdb y .accdb está pendiente. No se cambiará la extensión de un archivo SQLite.</p>
+<p id="saveAsChooseHint" class="hint"></p><p class="hint">Para Access se descargará un paquete de conversión. Después ejecuta el conversor local incluido en la carpeta CONVERSOR_WINDOWS. No se renombra un archivo SQLite.</p>
 <div class="saveas-buttons"><button id="saveAsCancel" type="button">Cancelar</button><button id="saveAsConfirm" type="button" class="primary">Guardar</button></div>
 </div></div>
-<script src="vendor/sql-wasm.js"></script><script src="js/app.js"></script><script src="js/queries.js"></script><script src="js/query-designer19.js"></script><script src="js/forms.js"></script><script src="js/access-import.js"></script><script src="js/advanced.js"></script></body></html>
+<script src="vendor/sql-wasm.js"></script><script src="js/app.js"></script><script src="js/queries.js"></script><script src="js/query-designer19.js"></script><script src="js/forms.js"></script><script src="js/access-import.js"></script><script src="js/advanced.js"></script><script src="js/export-bridge20.js"></script></body></html>

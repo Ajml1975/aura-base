@@ -1,0 +1,20 @@
+AURA BASE 2.0.0 — PRIMERA ENTREGA DEL CONVERSOR ACCESS PARA WINDOWS
+
+1. Publica los archivos web del ZIP en GitHub Pages, manteniendo las carpetas.
+2. En AURA BASE: Archivo > Guardar como > Access .accdb o .mdb.
+3. Se descarga un archivo .aura-access.json, NO un archivo Access todavía.
+4. En tu Windows con Microsoft Access 365 instalado, abre CONVERSOR_WINDOWS.
+5. Ejecuta CONVERTIR_ACCDB.bat o CONVERTIR_MDB.bat y arrastra el archivo JSON descargado a la ventana.
+6. El conversor crea un archivo Access REAL junto al JSON, y un informe de conversión.
+
+LIMITACIONES IMPORTANTES
+- Conversión local experimental NO probada en Windows con Access real en este entorno.
+- Las tablas y registros son el objetivo inicial. Las relaciones, claves primarias,
+  índices, tipos especiales, adjuntos, consultas, formularios, informes y macros NO
+  se convierten de forma completa en esta versión.
+- Los campos BLOB no se transfieren. Los textos largos pueden truncarse.
+- Conserva el archivo .db original y el JSON hasta comprobar el resultado.
+- LibreOffice .odb está pendiente: no se presenta una exportación ficticia.
+- Importación .mdb/.accdb desde navegador sigue siendo el importador BETA
+  anterior de tablas y datos, no un importador completo de objetos Access.
+- El conversor debe ejecutarse en Windows, no dentro de GitHub Pages.

@@ -43,8 +43,10 @@ async function confirmSaveAs(){
  const btn=$('#saveAsConfirm');
  try{
   if(!db)throw Error('Primero crea o abre una base de datos');
-  if($('#saveAsFormat').value!=='db')throw Error('La conversión a Access todavía no está disponible');
+  const format=$('#saveAsFormat').value;
+  if(!['db','mdb','accdb'].includes(format))throw Error('Formato no disponible');
   const filename=validateSaveName($('#saveAsName').value);
+  if(format!=='db'){auraDownloadBridge(format,filename.slice(0,-3));$('#saveAsDialog').hidden=true;return;}
   const destination=$('#saveAsDestination').value;
   btn.disabled=true;
   const bytes=db.export(),blob=new Blob([bytes],{type:'application/vnd.sqlite3'});
