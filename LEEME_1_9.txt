@@ -1,0 +1,15 @@
+AURA BASE 1.9.0 BETA — DISEÑADOR VISUAL DE CONSULTAS
+
+Partiendo de AURA BASE 1.8.3, se incorpora en Consultas el botón «Diseñador estilo Access».
+Permite añadir hasta dos tablas, seleccionar sus campos de enlace, elegir INNER/LEFT JOIN y diseñar una consulta de selección con filas Campo, Tabla, Orden, Mostrar, Criterios y O:.
+Se genera SQL SQLite y se pueden ejecutar, guardar y recuperar consultas en el archivo .db.
+Las consultas de acción y demás asistentes antiguos permanecen disponibles en «Volver al diseñador sencillo».
+
+LIMITACIONES BETA:
+- El diseñador visual nuevo se centra en consultas de SELECCIÓN de hasta dos tablas; consultas de acción y de más tablas se trabajan en los asistentes anteriores o SQL.
+- La fila O: incorpora una alternativa global a la fila Criterios (AND dentro de cada fila, OR entre filas).
+- No convierte automáticamente consultas SQL arbitrarias al diseñador visual.
+- No exporta todavía .mdb/.accdb; conserva exportación .db e importación Access existente.
+- No se ha podido completar prueba funcional de navegador en este entorno; se ha validado sintaxis JS.
+
+PUBLICACIÓN: descomprimir y subir los archivos y carpetas de la raíz a GitHub. Verificar la versión 1.9.0 y probar con una copia de la base.
